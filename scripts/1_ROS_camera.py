@@ -13,7 +13,7 @@ from limo_application.cfg import image_processingConfig
 import cv2
 import numpy as np
 
-class ROS_Camera:
+class ROS_Camera(object):
     def __init__(self):
         rospy.init_node("ros_camera_sub_node")
         rospy.Subscriber("/camera/rgb/image_raw/compressed", CompressedImage, self.image_topic_callback)

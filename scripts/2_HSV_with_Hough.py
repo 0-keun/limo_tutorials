@@ -14,9 +14,9 @@ import cv2
 import numpy as np
 from lane_detect import Lane_Detector
 
-class ROS_Camera(Lane_Detector):
+class ROS_Camera(Lane_Detector,object):
     def __init__(self):
-        super.__init__()
+        super(ROS_Camera, self).__init__()
         rospy.init_node("lane_detect_with_HSV_Hough")
         rospy.Subscriber("/camera/rgb/image_raw/compressed", CompressedImage, self.image_topic_callback)
         self.cvbridge = CvBridge()
