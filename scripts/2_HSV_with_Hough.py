@@ -1,7 +1,5 @@
-#! /usr/bin/env python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# limo_application/scripts/lane_detection/lane_detect.py
-# WeGo LIMO Pro를 이용한 차선 인식 코드
 
 import rospy
 from cv_bridge import CvBridge
