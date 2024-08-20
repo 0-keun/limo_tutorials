@@ -5,13 +5,22 @@ import rospy
 from geometry_msgs.msg import PoseStamped, PoseWithCovarianceStamped, Twist
 from std_msgs.msg import Float32
 import math
+import csv
+import numpy as np
 
 class Log_Position():
     def __init__(self):
         rospy.init_node('tag_position', anonymous=True)
 
+        self.path_array = []
+
         ### sub ###
         rospy.Subscriber('/amcl_pose', PoseWithCovarianceStamped, self.amcl_pose_callback)
+
+    def save_path(self):
+        with open('path_data.csv',mode='wb') as file:
+            writer = csv.writer(file)
+            writer.writerows(self.path_array)
 
     def amcl_pose_callback(self, data):
 
@@ -25,6 +34,9 @@ class Log_Position():
         self.O_w = data.pose.pose.orientation.w
 
         self.print_position()
+        self.path_array.append([self.P_x,self.P_y,self.P_z,self.O_x,self.O_y,self.O_z,self.O_w])
+	self.save_path()
+        # print(self.path_array)
 
     def print_position(self):
         print("position: ({:.2f}, {:.2f}, {:.2f})".format(self.P_x,self.P_y,self.P_z))
