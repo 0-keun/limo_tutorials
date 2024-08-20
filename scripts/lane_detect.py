@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 
-class Lane_Detector:
+class Lane_Detector(object):
     def __init__(self):
         self.white_lower = np.array([0,0,200])
         self.white_upper = np.array([180,25,255])
